@@ -1,12 +1,12 @@
 #!/bin/python3
 from moviepy.editor import *
 from math import trunc
-from sys import argv
+from sys import argv, exit
 
 # if the user hasn't provided enough arguments, give them the usage
 if len(argv) < 4:
     print('usage: ./fridge <audio> <background> <output>')
-
+    exit(1)
 # get the arguments
 audio_path = argv[1]
 background_path = argv[2]
