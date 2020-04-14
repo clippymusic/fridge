@@ -19,6 +19,7 @@ gif = background_path.endswith('.gif')
 # load the background and the audio
 audio = AudioFileClip(audio_path)
 image = VideoFileClip(background_path) if gif else ImageClip(background_path)
+image = image.margin(left=100, right=100)
 
 # set loop times
 if gif:
