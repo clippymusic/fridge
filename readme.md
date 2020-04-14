@@ -5,7 +5,7 @@ creates music videos from an image or gif and an audio track
 make sure you have python3 and pip installed
 
 ```
-git clone https://github.com/iceymusic/fridge
+git clone https://github.com/clippymusic/fridge
 cd ./fridge
 python3 -m pip install ./requirements.txt
 ```
