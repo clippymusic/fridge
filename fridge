@@ -1,0 +1,35 @@
+#!/bin/python3
+from moviepy.editor import *
+from math import trunc
+from sys import argv
+
+# if the user hasn't provided enough arguments, give them the usage
+if len(argv) < 4:
+    print('usage: ./fridge <audio> <background> <output>')
+
+# get the arguments
+audio_path = argv[1]
+background_path = argv[2]
+output_path = argv[3]
+
+# check if the background is a gif
+gif = background_path.endswith('.gif')
+
+# load the background and the audio
+audio = AudioFileClip(audio_path)
+
+image = VideoFileClip(background_path) if gif else ImageClip(background_path)
+width, height = image.size
+
+# set loop times
+if gif:
+    loops = trunc(audio.duration / image.duration)
+    image = image.loop(n=loops)
+
+# compose it
+final = CompositeVideoClip([image], size = (width, height))
+final = final.set_audio(audio)
+final = final.set_duration(audio.duration)
+
+# render it
+final.write_videofile(output_path, fps=30, codec='mpeg4')
