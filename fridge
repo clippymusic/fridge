@@ -7,6 +7,7 @@ from sys import argv, exit
 if len(argv) < 4:
     print('usage: ./fridge <audio> <background> <output>')
     exit(1)
+
 # get the arguments
 audio_path = argv[1]
 background_path = argv[2]
@@ -17,9 +18,7 @@ gif = background_path.endswith('.gif')
 
 # load the background and the audio
 audio = AudioFileClip(audio_path)
-
 image = VideoFileClip(background_path) if gif else ImageClip(background_path)
-width, height = image.size
 
 # set loop times
 if gif:
@@ -27,7 +26,7 @@ if gif:
     image = image.loop(n=loops)
     
 # compose it
-final = CompositeVideoClip([image], size = (width, height))
+final = CompositeVideoClip([image], size=image.size)
 final = final.set_audio(audio)
 final = final.set_duration(audio.duration)
 
