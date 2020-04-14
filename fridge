@@ -25,11 +25,11 @@ width, height = image.size
 if gif:
     loops = trunc(audio.duration / image.duration)
     image = image.loop(n=loops)
-
+    
 # compose it
 final = CompositeVideoClip([image], size = (width, height))
 final = final.set_audio(audio)
 final = final.set_duration(audio.duration)
 
 # render it
-final.write_videofile(output_path, fps=30, codec='mpeg4')
+final.write_videofile(output_path, fps=30, codec='mpeg4', bitrate='12000k')
